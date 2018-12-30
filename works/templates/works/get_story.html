@@ -1,0 +1,13 @@
+<h1>{{ story.title }}</h1>
+<h2>Chapters:</h2>
+<ol>
+    {% for chapter in story.chapter_set.all %}
+    <li>{{ chapter.title }}</li>
+    {% endfor %}
+</ol>
+<h3>Characters:</h3>
+<ul>
+    {% for character in story.character_set.all %}
+    <li>{{ character.name }}</li>
+    {% endfor %}
+</ul>
