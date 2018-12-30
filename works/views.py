@@ -1,9 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .models import Story, Chapter, Character
+
 
 def index(request):
-    return HttpResponse('MY VERY FIRST VIEW IN THIS APP, WOOOOOOOOOOOOOOAH!!!')
+    stories_list = Story.objects.order_by('-created_date')
+    context = {
+        'stories_list': stories_list
+    }
+    return render(request, 'works/index.html', context)
 
 
 def get_story(request, story_id):

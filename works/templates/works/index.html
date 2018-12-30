@@ -1,0 +1,8 @@
+{% if stories_list %}
+    <ul>
+    {% for story in stories_list %}
+        <li><a href="{% url 'works:get_story' story.id %}">{{ story.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+{% endif %}

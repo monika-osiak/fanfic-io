@@ -55,7 +55,7 @@ ROOT_URLCONF = 'fanfic_io.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'works/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
