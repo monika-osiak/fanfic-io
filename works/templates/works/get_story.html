@@ -2,7 +2,7 @@
 <h2>Chapters:</h2>
 <ol>
     {% for chapter in story.chapter_set.all %}
-    <li>{{ chapter.title }}</li>
+    <li><a href="{% url 'works:get_chapter' story.id chapter.id %}">{{ chapter.title }}</a></li>
     {% endfor %}
 </ol>
 <h3>Characters:</h3>

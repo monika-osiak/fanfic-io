@@ -21,7 +21,11 @@ def get_story(request, story_id):
 
 
 def get_chapter(request, story_id, chapter_id):
-    return HttpResponse('You are watching the chapter %s of the story number %s' % (chapter_id, story_id))
+    chapter = get_object_or_404(Chapter, pk=chapter_id)
+    context = {
+        'chapter': chapter
+    }
+    return render(request, 'works/get_chapter.html', context)
 
 
 def get_character(request, story_id, character_id):
