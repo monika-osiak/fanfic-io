@@ -8,6 +8,6 @@
 <h3>Characters:</h3>
 <ul>
     {% for character in story.character_set.all %}
-    <li>{{ character.name }}</li>
+       <li><a href="{% url 'works:get_character' story.id character.id %}">{{ character.name }}</a></li>
     {% endfor %}
 </ul>
