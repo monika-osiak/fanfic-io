@@ -8,6 +8,9 @@ class Story(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     last_modified = models.DateTimeField(default=timezone.now)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name_plural = "Stories"
 
@@ -20,7 +23,16 @@ class Chapter(models.Model):
     last_modified = models.DateTimeField(default=timezone.now)
     content = models.TextField()
 
+    def __str__(self):
+        return str(self.number) + ". " + self.title
+
+    class Meta:
+        ordering = ['number']
+
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
     of_story = models.ForeignKey(Story, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
