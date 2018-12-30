@@ -8,6 +8,9 @@ class Story(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     last_modified = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        verbose_name_plural = "Stories"
+
 
 class Chapter(models.Model):
     of_story = models.ForeignKey(Story, on_delete=models.CASCADE)
@@ -20,3 +23,4 @@ class Chapter(models.Model):
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
+    of_story = models.ForeignKey(Story, on_delete=models.CASCADE)
