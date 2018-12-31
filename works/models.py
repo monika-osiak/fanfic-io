@@ -33,6 +33,7 @@ class Chapter(models.Model):
 class Character(models.Model):
     name = models.CharField(max_length=100)
     of_story = models.ForeignKey(Story, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='character_images', blank=True, default='empty.jpg')
 
     def __str__(self):
         return self.name
