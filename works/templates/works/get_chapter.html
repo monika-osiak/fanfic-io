@@ -1,2 +1,4 @@
 <h1>{{ chapter.title }}</h1>
 <p>{{ chapter.content }}</p>
+
+<p><a href="{% url 'works:get_story' chapter.of_story.id %}">Take me back</a></p>
