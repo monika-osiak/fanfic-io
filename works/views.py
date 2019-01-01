@@ -1,9 +1,18 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.views import generic
 
 from .models import Story, Chapter, Character
 
 
+class IndexView(generic.ListView):
+    template_name = 'works/index.html'
+    context_object_name = 'stories_list'
+
+    def get_queryset(self):
+        return Story.objects.order_by('-created_date')
+
+
+# need to be removed later
 def index(request):
     stories_list = Story.objects.order_by('-created_date')
     context = {
@@ -12,6 +21,12 @@ def index(request):
     return render(request, 'works/index.html', context)
 
 
+class StoryView(generic.DetailView):
+    model = Story
+    template_name = 'works/get_story.html'
+
+
+# need to be removed later
 def get_story(request, story_id):
     story = get_object_or_404(Story, pk=story_id)
     context = {
