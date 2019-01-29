@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Story, Chapter, Character
+from .forms import StoryForm
 
 
 class IndexView(generic.ListView):
@@ -25,3 +28,18 @@ class ChapterView(generic.DetailView):
 class CharacterView(generic.DetailView):
     model = Character
     template_name = 'works/get_character.html'
+
+
+def new_story(request):
+    if request.method != 'POST':
+        form = StoryForm()
+    else:
+        form = StoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('works:index'))
+
+    context = {
+        'form': form
+    }
+    return render(request, 'works/new_story.html', context)

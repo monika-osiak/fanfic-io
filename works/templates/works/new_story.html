@@ -1,0 +1,9 @@
+<h3>Add new story</h3>
+
+<form action="{% url 'works:new_story' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Submit</button>
+</form>
+
+<a href="{% url 'works:index' %}">Take me back</a>

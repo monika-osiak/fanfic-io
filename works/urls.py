@@ -12,6 +12,8 @@ urlpatterns = [
     path('<int:story_id>/chapters/<int:pk>/', views.ChapterView.as_view(), name='get_chapter'),
     # .../works/5/characters/1
     path('<int:story_id>/characters/<int:pk>/', views.CharacterView.as_view(), name='get_character'),
+    # .../works/new
+    path('new_story/', views.new_story, name='new_story'),
 ]
 
 '''
