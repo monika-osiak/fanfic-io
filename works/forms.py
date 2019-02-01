@@ -21,3 +21,14 @@ class ChapterForm(forms.ModelForm):
             'title': 'Title:',
             'content': ''
         }
+
+
+class CharacterForm(forms.ModelForm):
+    class Meta:
+        model = Character
+        fields = ['name', 'of_story', 'image']
+        labels = {
+            'name': 'Full name:',
+            'of_story': 'Story:',
+            'image': 'Picture:'
+        }

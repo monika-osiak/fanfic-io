@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from .models import Story, Chapter, Character
-from .forms import StoryForm, ChapterForm
+from .forms import StoryForm, ChapterForm, CharacterForm
 
 
 class IndexView(generic.ListView):
@@ -60,3 +60,19 @@ def new_chapter(request, story_id):
         'story': story
     }
     return render(request, 'works/new_chapter.html', context)
+
+def new_character(request, story_id):
+    story = get_object_or_404(Story, pk=story_id)
+    if request.method != 'POST':
+        form = CharacterForm()
+    else:
+        form = CharacterForm(request.POST, request.FILES)
+        if form.is_valid():
+            character = form.save()
+            return HttpResponseRedirect(reverse('works:get_story', args=[story_id]))
+
+    context = {
+        'form': form,
+        'story': story
+    }
+    return render(request, 'works/new_character.html', context)
