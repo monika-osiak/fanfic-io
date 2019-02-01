@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import Story, Chapter, Character
 from .forms import StoryForm, ChapterForm, CharacterForm
@@ -12,24 +13,43 @@ class IndexView(generic.ListView):
     context_object_name = 'stories_list'
 
     def get_queryset(self):
-        return Story.objects.order_by('-created_date')
+        return Story.objects.filter(author=self.request.user).order_by('-created_date')
 
 
 class StoryView(generic.DetailView):
     model = Story
     template_name = 'works/get_story.html'
 
+    def get_object(self):
+        story = super().get_object()
+        if story.author != self.request.user:
+            raise Http404
+        return story
+
 
 class ChapterView(generic.DetailView):
     model = Chapter
     template_name = 'works/get_chapter.html'
+
+    def get_object(self):
+        chapter = super().get_object()
+        if chapter.of_story.author != self.request.user:
+            raise Http404
+        return chapter
 
 
 class CharacterView(generic.DetailView):
     model = Character
     template_name = 'works/get_character.html'
 
+    def get_object(self):
+        character = super().get_object()
+        if character.of_story.author != self.request.user:
+            raise Http404
+        return character
 
+
+@login_required
 def new_story(request):
     if request.method != 'POST':
         form = StoryForm()
@@ -45,6 +65,7 @@ def new_story(request):
     return render(request, 'works/new_story.html', context)
 
 
+@login_required
 def new_chapter(request, story_id):
     story = get_object_or_404(Story, pk=story_id)
     if request.method != 'POST':
@@ -61,6 +82,8 @@ def new_chapter(request, story_id):
     }
     return render(request, 'works/new_chapter.html', context)
 
+
+@login_required
 def new_character(request, story_id):
     story = get_object_or_404(Story, pk=story_id)
     if request.method != 'POST':
