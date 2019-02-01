@@ -1,5 +1,13 @@
 <h1>READ ME!</h1>
 
+{% if user.is_authenticated %}
+    Hi, {{ user.username }}.
+    <a href="{% url 'users:logout' %}">Log out</a>
+{% else %}
+    <a href="{% url 'users:login' %}">Log in</a>
+    <a href="{% url 'users:register' %}">Register</a>
+{% endif %}
+
 {% if stories_list %}
     <ul>
     {% for story in stories_list %}

@@ -1,0 +1,10 @@
+{% if form.errors %}
+    <p>Login and/or password incorrect. Try again.</p>
+{% endif %}
+
+<form method="POST" action="{% url 'users:login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Log in</button>
+    <input type="hidden" name="next" value="{% url 'works:index' %}">
+</form>
