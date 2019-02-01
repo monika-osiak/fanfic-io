@@ -12,8 +12,10 @@ urlpatterns = [
     path('<int:story_id>/chapters/<int:pk>/', views.ChapterView.as_view(), name='get_chapter'),
     # .../works/5/characters/1
     path('<int:story_id>/characters/<int:pk>/', views.CharacterView.as_view(), name='get_character'),
-    # .../works/new
+    # .../works/new_story
     path('new_story/', views.new_story, name='new_story'),
+    # .../works/5/new_chapter
+    path('<int:story_id>/new_chapter/', views.new_chapter, name='new_chapter')
 ]
 
 '''
