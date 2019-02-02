@@ -56,7 +56,9 @@ def new_story(request):
     else:
         form = StoryForm(request.POST)
         if form.is_valid():
-            form.save()
+            story = form.save(commit=False)
+            story.author = request.user
+            story.save()
             return HttpResponseRedirect(reverse('works:index'))
 
     context = {
