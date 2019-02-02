@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('works:index'))
+    return HttpResponseRedirect(reverse('main:index'))
 
 
 def register(request):
