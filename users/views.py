@@ -42,4 +42,4 @@ def sign_up(request):
             return HttpResponseRedirect(reverse('works:index'))
 
     context = {'form': form}
-    return render(request, 'users/register.html', context)
+    return render(request, 'users/sign_up.html', context)
