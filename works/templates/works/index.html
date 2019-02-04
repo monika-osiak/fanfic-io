@@ -11,7 +11,7 @@
 {% if stories_list %}
     <ul>
     {% for story in stories_list %}
-        <li><a href="{% url 'works:get_story' story.id %}">{{ story.title }}</a></li>
+        <li><a href="{% url 'works:get_story' story.id %}">{{ story.title }}</a> by {{ story.author }}</li>
     {% endfor %}
     </ul>
 {% else %}
