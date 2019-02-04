@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -51,6 +51,8 @@ def profile(request, username):
 @transaction.atomic
 def update_profile(request, username):
     user = get_object_or_404(User, username=username)
+    if user != request.user:
+        raise Http404
     if request.method != 'POST':
         user_form = UserForm(instance=user)
         profile_form = ProfileForm(instance=user.profile)
