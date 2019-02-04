@@ -6,6 +6,4 @@ app_name = 'main'
 urlpatterns = [
     # ...
     path('', views.index, name='index'),
-    # .../admin
-    path('<slug:username>', views.profile, name='profile'),
 ]

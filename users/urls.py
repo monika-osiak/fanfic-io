@@ -8,5 +8,5 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('sign_up/', views.sign_up, name='sign_up'),
-    # TODO: add user profile view - how to get string argument from url?
+    path('<slug:username>', views.profile, name='profile'),
 ]
