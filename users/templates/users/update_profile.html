@@ -1,0 +1,7 @@
+<form method="POST" action="{% url 'users:update_profile' user.username %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <button name="submit">Update</button>
+    <input type="hidden" name="next" value="{% url 'users:profile' user.username %}">
+</form>

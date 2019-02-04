@@ -1,10 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db import transaction
 
-from .forms import SignUpForm
+from .forms import SignUpForm, UserForm, ProfileForm
 from .models import Profile
 
 
@@ -42,3 +45,28 @@ def profile(request, username):
         'user_profile': user_profile
     }
     return render(request, 'users/user_profile.html', context)
+
+
+@login_required
+@transaction.atomic
+def update_profile(request, username):
+    user = get_object_or_404(User, username=username)
+    if request.method != 'POST':
+        user_form = UserForm(instance=user)
+        profile_form = ProfileForm(instance=user.profile)
+    else:
+        user_form = UserForm(request.POST, instance=user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return HttpResponseRedirect(reverse('users:profile', args=[username]))
+        else:
+            messages.error(request, 'Please correct the error below.')
+    context = {
+        'user': user,
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
+    return render(request, 'users/update_profile.html', context)
