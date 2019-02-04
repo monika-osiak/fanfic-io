@@ -72,3 +72,8 @@ def update_profile(request, username):
         'profile_form': profile_form
     }
     return render(request, 'users/update_profile.html', context)
+
+
+def works_list(request, username):
+    pass
+    # TODO: make it works
