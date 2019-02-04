@@ -1,0 +1,9 @@
+<h1>{{ user.username }}</h1>
+
+<img src="{{ user_profile.picture.url }}" width="300" alt="image">
+<b>First name: </b>{{ user.first_name }}
+<b>Last name: </b>{{ user.last_name }}
+<b>Email address: </b>{{ user.email }}
+<b>About me:</b>{{ user_profile.description }}
+
+<a href="{% url 'main:index' %}">Take me back</a>
