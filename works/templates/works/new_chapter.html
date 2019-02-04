@@ -1,6 +1,6 @@
 <h3>Add new chapter to {{ story.title }}</h3>
 
-<form action="{% url 'works:new_chapter' story.id %}" method="POST">
+<form action="{% url 'works:new_chapter' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <button name="submit">Submit</button>

@@ -48,42 +48,35 @@ def new_story(request):
     }
     return render(request, 'works/new_story.html', context)
 
+# TODO: user is able to add new character/chapter only to his own story
 
 @login_required
-def new_chapter(request, story_id):
-    story = get_object_or_404(Story, pk=story_id)
-    if story.author != request.user:
-        raise Http404
+def new_chapter(request):
     if request.method != 'POST':
         form = ChapterForm()
     else:
         form = ChapterForm(request.POST)
         if form.is_valid():
             chapter = form.save()
-            return HttpResponseRedirect(reverse('works:get_story', args=[story_id]))
+            return HttpResponseRedirect(reverse('works:get_story', args=[chapter.of_story.id]))
 
     context = {
         'form': form,
-        'story': story
     }
     return render(request, 'works/new_chapter.html', context)
 
 
 @login_required
-def new_character(request, story_id):
-    story = get_object_or_404(Story, pk=story_id)
-    if story.author != request.user:
-        raise Http404
+def new_character(request):
     if request.method != 'POST':
         form = CharacterForm()
     else:
         form = CharacterForm(request.POST, request.FILES)
         if form.is_valid():
             character = form.save()
-            return HttpResponseRedirect(reverse('works:get_story', args=[story_id]))
+            return HttpResponseRedirect(reverse('works:get_story', args=[character.of_story.id]))
 
     context = {
         'form': form,
-        'story': story
     }
     return render(request, 'works/new_character.html', context)
