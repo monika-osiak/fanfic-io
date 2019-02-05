@@ -1,14 +1,22 @@
-<h1>READ ME!</h1>
+<div class="header">
+    <h1>fanfic.io</h1>
+    <div class="user-gretting">
+    {% if user.is_authenticated %}
+        Hi, {{ user.username }}.
+        <a href="{% url 'users:logout' %}">Log out</a>
+        <div>
+            <a href="{% url 'works:new_story' %}">Add new story</a>
+        </div>
+    {% else %}
+        <a href="{% url 'users:login' %}">Log in</a> or <a href="{% url 'users:sign_up' %}">sign up</a>
+    {% endif %}
+    </div>
+</div>
 
-{% if user.is_authenticated %}
-    Hi, {{ user.username }}.
-    <a href="{% url 'users:logout' %}">Log out</a>
-{% else %}
-    <a href="{% url 'users:login' %}">Log in</a>
-    <a href="{% url 'users:register' %}">Register</a>
-{% endif %}
 
-{% if stories_list %}
+
+<div class="content">
+    {% if stories_list %}
     <ul>
     {% for story in stories_list %}
         <li><a href="{% url 'works:get_story' story.id %}">{{ story.title }}</a> by {{ story.author }}</li>
@@ -17,5 +25,4 @@
 {% else %}
     <p>No stories yet.</p>
 {% endif %}
-
-<a href="{% url 'works:new_story' %}">Add new story</a>
+</div>

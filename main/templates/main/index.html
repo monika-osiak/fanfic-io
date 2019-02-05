@@ -1,3 +1,15 @@
-<h1>fanfic.io</h1>
-<a href="{% url 'users:login' %}">Log in</a>
-<a href="{% url 'users:sign_up' %}">Sign up</a>
+<div class="header">
+    <h1>fanfic.io</h1>
+</div>
+
+<div class="content">
+    <div class="link">
+        <a href="{% url 'users:login' %}">Log in</a>
+    </div>
+    <div class="link">
+        <a href="{% url 'users:sign_up' %}">Sign up</a>
+    </div>
+    <div class="link">
+        <a href="{% url 'works:index' %}">Continue without logging in</a>
+    </div>
+</div>
