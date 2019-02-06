@@ -1,11 +1,18 @@
+<div class="header">
+    <h1>fanfic.io</h1>
+</div>
+
 {% load static %}
 
-<h1>{{ user.username }}</h1>
 
-<img src="{{ user_profile.picture.url }}" width="300" alt="image">
-<b>First name: </b>{{ user.first_name }}
-<b>Last name: </b>{{ user.last_name }}
-<b>Email address: </b>{{ user.email }}
-<b>About me:</b>{{ user_profile.description }}
+<div class="content">
+    <h2>{{ user.username }}</h2>
+    <img class="user-image" src="{{ user_profile.picture.url }}" width="300" alt="image">
+    <p><b>First name: </b>{{ user.first_name }}</p>
+    <p><b>Last name: </b>{{ user.last_name }}</p>
+    <p><b>Email address: </b>{{ user.email }}</p>
+    <p><b>About me:</b>{{ user_profile.description }}</p>
+</div>
+
 
 <a href="{% url 'main:index' %}">Take me back</a>

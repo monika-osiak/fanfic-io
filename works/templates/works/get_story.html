@@ -1,15 +1,21 @@
-<h1>{{ story.title }}</h1>
-<h2>Chapters:</h2>
-<ol>
-    {% for chapter in story.chapter_set.all %}
-    <li><a href="{% url 'works:get_chapter' story.id chapter.id %}">{{ chapter.title }}</a></li>
-    {% endfor %}
-</ol>
-<h3>Characters:</h3>
-<ul>
-    {% for character in story.character_set.all %}
-       <li><a href="{% url 'works:get_character' story.id character.id %}">{{ character.name }}</a></li>
-    {% endfor %}
-</ul>
+<div class="header">
+    <h1>fanfic.io</h1>
+</div>
+
+<div class="content">
+    <h2>{{ story.title }}</h2>
+    <h3>Chapters:</h3>
+    <ol>
+        {% for chapter in story.chapter_set.all %}
+        <li><a href="{% url 'works:get_chapter' story.id chapter.id %}">{{ chapter.title }}</a></li>
+        {% endfor %}
+    </ol>
+    <h3>Characters:</h3>
+    <ul>
+        {% for character in story.character_set.all %}
+           <li><a href="{% url 'works:get_character' story.id character.id %}">{{ character.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
 
 <a href="{% url 'works:index' %}">Take me back</a>
