@@ -50,18 +50,23 @@ def new_story(request):
 
 # TODO: user is able to add new character/chapter only to his own story
 
+
 @login_required
-def new_chapter(request):
+def new_chapter(request, story_id):
+    story = Story.objects.get(id=story_id)
     if request.method != 'POST':
         form = ChapterForm()
     else:
         form = ChapterForm(request.POST)
         if form.is_valid():
-            chapter = form.save()
+            chapter = form.save(commit=False)
+            chapter.of_story = story
+            chapter.save()
             return HttpResponseRedirect(reverse('works:get_story', args=[chapter.of_story.id]))
 
     context = {
         'form': form,
+        'story': story
     }
     return render(request, 'works/new_chapter.html', context)
 
