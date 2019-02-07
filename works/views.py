@@ -54,6 +54,8 @@ def new_story(request):
 @login_required
 def new_chapter(request, story_id):
     story = Story.objects.get(id=story_id)
+    if story.author != request.user:
+        raise Http404
     if request.method != 'POST':
         form = ChapterForm()
     else:
@@ -74,6 +76,8 @@ def new_chapter(request, story_id):
 @login_required
 def new_character(request, story_id):
     story = Story.objects.get(id=story_id)
+    if story.author != request.user:
+        raise Http404
     if request.method != 'POST':
         form = CharacterForm()
     else:
