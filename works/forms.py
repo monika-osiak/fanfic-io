@@ -14,9 +14,8 @@ class StoryForm(forms.ModelForm):
 class ChapterForm(forms.ModelForm):
     class Meta:
         model = Chapter
-        fields = ['number', 'title', 'content']
+        fields = ['title', 'content']
         labels = {
-            'number': 'Chapter number:',
             'title': 'Title:',
             'content': ''
         }

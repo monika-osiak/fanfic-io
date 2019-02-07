@@ -63,6 +63,7 @@ def new_chapter(request, story_id):
         if form.is_valid():
             chapter = form.save(commit=False)
             chapter.of_story = story
+            chapter.number = Chapter.objects.filter(of_story=story_id).count() + 1
             chapter.save()
             return HttpResponseRedirect(reverse('works:get_story', args=[chapter.of_story.id]))
 
