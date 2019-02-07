@@ -17,5 +17,5 @@ urlpatterns = [
     # .../works/5/new_chapter
     path('<int:story_id>/new_chapter/', views.new_chapter, name='new_chapter'),
     # .../works/5/new_character
-    path('new_character/', views.new_character, name='new_character')
+    path('<int:story_id>/new_character/', views.new_character, name='new_character')
 ]

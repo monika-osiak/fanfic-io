@@ -72,16 +72,20 @@ def new_chapter(request, story_id):
 
 
 @login_required
-def new_character(request):
+def new_character(request, story_id):
+    story = Story.objects.get(id=story_id)
     if request.method != 'POST':
         form = CharacterForm()
     else:
         form = CharacterForm(request.POST, request.FILES)
         if form.is_valid():
-            character = form.save()
+            character = form.save(commit=False)
+            character.of_story = story
+            character.save()
             return HttpResponseRedirect(reverse('works:get_story', args=[character.of_story.id]))
 
     context = {
         'form': form,
+        'story': story
     }
     return render(request, 'works/new_character.html', context)

@@ -25,9 +25,8 @@ class ChapterForm(forms.ModelForm):
 class CharacterForm(forms.ModelForm):
     class Meta:
         model = Character
-        fields = ['name', 'of_story', 'image']
+        fields = ['name', 'image']
         labels = {
             'name': 'Full name:',
-            'of_story': 'Story:',
             'image': 'Picture:'
         }
