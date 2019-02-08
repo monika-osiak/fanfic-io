@@ -4,8 +4,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Story, Chapter, Character
-from .forms import StoryForm, ChapterForm, CharacterForm
+from .models import Story, Chapter, Character, Comment
+from .forms import StoryForm, ChapterForm, CharacterForm, CommentForm
 
 
 class IndexView(generic.ListView):
@@ -27,11 +27,35 @@ class ChapterView(generic.DetailView):
 
 
 def get_story(request, story_id):
-    story = Story.objects.get(id=story_id)
+    story = get_object_or_404(Story, id=story_id)
     context = {
         'story': story
     }
     return render(request, 'works/get_story.html', context)
+
+
+def get_chapter(request, story_id, chapter_number):
+    chapter = get_object_or_404(Chapter,
+                                of_story=story_id,
+                                number=chapter_number)
+    comments = chapter.comments.filter(active=True)
+    if request.method != 'POST':
+        comment_form = CommentForm()
+    else:
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.of_chapter = chapter
+            new_comment.author = request.user
+            new_comment.save()
+            return HttpResponseRedirect(reverse('works:get_chapter', args=[story_id,
+                                                                           chapter_number]))
+    context = {
+        'chapter': chapter,
+        'comments': comments,
+        'comment_form': comment_form
+    }
+    return render(request, 'works/get_chapter.html', context)
 
 
 class CharacterView(generic.DetailView):

@@ -41,7 +41,9 @@ class Character(models.Model):
 
 
 class Comment(models.Model):
-    of_chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    of_chapter = models.ForeignKey(Chapter,
+                                   on_delete=models.CASCADE,
+                                   related_name='comments')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)

@@ -5,6 +5,30 @@
 <div class="content">
     <h2>{{ chapter.title }}</h2>
     <p>{{ chapter.content }}</p>
+
+    <div class="comments">
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="single-comment">
+                    <p><b>{{ comment.author.username }}</b></p>
+                    <p>{{ comment.body }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No comments yet.</p>
+        {% endif %}
+    </div>
+
+
+    {% if user.is_authenticated %}
+    <form action="{% url 'works:get_chapter' chapter.of_story.id chapter.number %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button name="submit">Submit</button>
+    </form>
+    {% else %}
+        <p>Only authenticated users may write comments.</p>
+    {% endif %}
 </div>
 
 <p><a href="{% url 'works:get_story' chapter.of_story.id %}">Take me back</a></p>
