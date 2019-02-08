@@ -26,6 +26,14 @@ class ChapterView(generic.DetailView):
     template_name = 'works/get_chapter.html'
 
 
+def get_story(request, story_id):
+    story = Story.objects.get(id=story_id)
+    context = {
+        'story': story
+    }
+    return render(request, 'works/get_story.html', context)
+
+
 class CharacterView(generic.DetailView):
     model = Character
     template_name = 'works/get_character.html'

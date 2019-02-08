@@ -7,7 +7,8 @@ urlpatterns = [
     # .../works/
     path('', views.IndexView.as_view(), name='index'),
     # .../works/5/
-    path('<int:pk>/', views.StoryView.as_view(), name='get_story'),
+    # path('<int:pk>/', views.StoryView.as_view(), name='get_story'),
+    path('<int:story_id>/', views.get_story, name='get_story'),
     # .../works/5/chapters/1
     path('<int:story_id>/chapters/<int:pk>/', views.ChapterView.as_view(), name='get_chapter'),
     # .../works/5/characters/1
