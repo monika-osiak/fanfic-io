@@ -56,12 +56,10 @@ def new_story(request):
     }
     return render(request, 'works/new_story.html', context)
 
-# TODO: user is able to add new character/chapter only to his own story
-
 
 @login_required
 def new_chapter(request, story_id):
-    story = Story.objects.get(id=story_id)
+    story = get_object_or_404(Story, id=story_id)
     if story.author != request.user:
         raise Http404
     if request.method != 'POST':
@@ -84,7 +82,7 @@ def new_chapter(request, story_id):
 
 @login_required
 def new_character(request, story_id):
-    story = Story.objects.get(id=story_id)
+    story = get_object_or_404(Story, id=story_id)
     if story.author != request.user:
         raise Http404
     if request.method != 'POST':
