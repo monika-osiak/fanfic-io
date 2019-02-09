@@ -10,6 +10,4 @@ urlpatterns = [
     path('sign_up/', views.sign_up, name='sign_up'),
     path('<slug:username>/', views.profile, name='profile'),
     path('<slug:username>/update', views.update_profile, name='update_profile'),
-    path('<slug:username>/your_works/', views.works_list, name='works_list')
-    # TODO: works_list -> generic view
 ]

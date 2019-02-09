@@ -12,6 +12,17 @@
     <p><b>Last name: </b>{{ user.last_name }}</p>
     <p><b>Email address: </b>{{ user.email }}</p>
     <p><b>About me:</b>{{ user_profile.description }}</p>
+
+    <h3>Works by {{ user.username }}</h3>
+    {% if user_works_list %}
+        <ul>
+        {% for work in user_works_list %}
+            <li><a href="{% url 'works:get_story' work.id %}">{{ work.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>This user has not posted any stories yet.</p>
+    {% endif %}
 </div>
 
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
+from django.views import generic
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -9,6 +10,7 @@ from django.db import transaction
 
 from .forms import SignUpForm, UserForm, ProfileForm
 from .models import Profile
+from works.models import Story
 
 
 def logout_view(request):
@@ -40,9 +42,11 @@ def sign_up(request):
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     user_profile = get_object_or_404(Profile, user=user)
+    user_works_list = user.story_set.all()
     context = {
         'user': user,
-        'user_profile': user_profile
+        'user_profile': user_profile,
+        'user_works_list': user_works_list
     }
     return render(request, 'users/user_profile.html', context)
 
