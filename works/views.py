@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Story, Chapter, Character, Comment
+from .models import Story, Chapter, Character
 from .forms import StoryForm, ChapterForm, CharacterForm, CommentForm
 
 

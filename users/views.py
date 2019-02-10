@@ -10,7 +10,6 @@ from django.db import transaction
 
 from .forms import SignUpForm, UserForm, ProfileForm
 from .models import Profile
-from works.models import Story
 
 
 def logout_view(request):
@@ -66,18 +65,13 @@ def update_profile(request, username):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Your profile was successfully updated!')
+            # messages.success(request, 'Your profile was successfully updated!')
             return HttpResponseRedirect(reverse('users:profile', args=[username]))
-        else:
-            messages.error(request, 'Please correct the error below.')
+        # else:
+            # messages.error(request, 'Please correct the error below.')
     context = {
         'user': user,
         'user_form': user_form,
         'profile_form': profile_form
     }
     return render(request, 'users/update_profile.html', context)
-
-
-def works_list(request, username):
-    pass
-    # TODO: make it works
