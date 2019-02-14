@@ -1,7 +1,6 @@
-<div class="header">
-    <h1>fanfic.io</h1>
-</div>
+{% extends 'works/base.html' %}
 
+{% block content %}
 <div class="content">
     <h2>{{ chapter.title }}</h2>
     <p>{{ chapter.content }}</p>
@@ -32,3 +31,4 @@
 </div>
 
 <p><a href="{% url 'works:get_story' chapter.of_story.id %}">Take me back</a></p>
+{% endblock content %}

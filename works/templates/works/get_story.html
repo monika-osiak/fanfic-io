@@ -1,13 +1,12 @@
-<div class="header">
-    <h1>fanfic.io</h1>
-</div>
+{% extends 'works/base.html' %}
 
+{% block content %}
 <div class="content">
     <h2>{{ story.title }}</h2>
     <h3>Chapters:</h3>
     <ol>
         {% for chapter in story.chapter_set.all %}
-        <li><a href="{% url 'works:get_chapter' story.id chapter.id %}">{{ chapter.title }}</a></li>
+        <li><a href="{% url 'works:get_chapter' story.id chapter.number %}">{{ chapter.title }}</a></li>
         {% endfor %}
     </ol>
     <h3>Characters:</h3>
@@ -19,3 +18,4 @@
 </div>
 
 <a href="{% url 'works:index' %}">Take me back</a>
+{% endblock content %}

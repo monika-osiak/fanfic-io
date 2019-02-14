@@ -1,4 +1,7 @@
-<h3>Add new story</h3>
+{% extends 'works/base.html' %}
+
+{% block content %}
+<h3>Add new story {{ user.username }}</h3>
 
 <form action="{% url 'works:new_story' %}" method="POST">
     {% csrf_token %}
@@ -7,3 +10,4 @@
 </form>
 
 <a href="{% url 'works:index' %}">Take me back</a>
+{% endblock content %}

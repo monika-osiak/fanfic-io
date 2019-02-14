@@ -1,3 +1,6 @@
+{% extends 'works/base.html' %}
+
+{% block content %}
 <h3>Add new chapter to {{ story.title }}</h3>
 
 <form action="{% url 'works:new_character' story.id %}" method="POST" enctype="multipart/form-data">
@@ -7,3 +10,4 @@
 </form>
 
 <a href="{% url 'works:index' %}">Take me back</a>
+{% endblock content %}

@@ -1,21 +1,8 @@
-<div class="header">
-    <h1>fanfic.io</h1>
-    <div class="user-gretting">
-    {% if user.is_authenticated %}
-        Hi, {{ user.username }}.
-        <a href="{% url 'users:logout' %}">Log out</a>
-        <div>
-            <a href="{% url 'works:new_story' %}">Add new story</a>
-        </div>
-    {% else %}
-        <a href="{% url 'users:login' %}">Log in</a> or <a href="{% url 'users:sign_up' %}">sign up</a>
-    {% endif %}
-    </div>
-</div>
+{% extends 'main/base.html' %}
 
-
-
+{% block content %}
 <div class="content">
+    <h3>Check out all the stories:</h3>
     {% if stories_list %}
     <ul>
     {% for story in stories_list %}
@@ -26,3 +13,4 @@
     <p>No stories yet.</p>
 {% endif %}
 </div>
+{% endblock content %}
