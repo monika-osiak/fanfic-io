@@ -1,0 +1,13 @@
+<div class="header">
+    <h1>fanfic.io</h1>
+    <h2>where your wildest stories come true!</h2>
+    <div class="user-greeting">
+    {% if user.is_authenticated %}
+        Hi, {{ user.username }}.
+        <a href="{% url 'users:logout' %}">Log out</a>
+        <a href="{% url 'works:new_story' %}">Add new story</a>
+    {% else %}
+        <a href="{% url 'users:login' %}">Log in</a> or <a href="{% url 'users:sign_up' %}">sign up</a>
+    {% endif %}
+    </div>
+</div>
