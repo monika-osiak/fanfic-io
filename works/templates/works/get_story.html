@@ -3,6 +3,7 @@
 {% block content %}
 <div class="content">
     <h2>{{ story.title }}</h2>
+    <p>{{ story.description }}</p>
     <h3>Chapters:</h3>
     <ol>
         {% for chapter in story.chapter_set.all %}
