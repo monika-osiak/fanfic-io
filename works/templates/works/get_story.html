@@ -9,12 +9,14 @@
         {% for chapter in story.chapter_set.all %}
         <li><a href="{% url 'works:get_chapter' story.id chapter.number %}">{{ chapter.title }}</a></li>
         {% endfor %}
+        <!-- TODO: when user is the author -> add new chapter -->
     </ol>
     <h3>Characters:</h3>
     <ul>
         {% for character in story.character_set.all %}
            <li><a href="{% url 'works:get_character' story.id character.id %}">{{ character.name }}</a></li>
         {% endfor %}
+        <!-- TODO: when user is the author -> add new character -->
     </ul>
 </div>
 
