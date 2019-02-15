@@ -11,3 +11,10 @@ urlpatterns = [
     path('<slug:username>/', views.profile, name='profile'),
     path('<slug:username>/update', views.update_profile, name='update_profile'),
 ]
+
+# TODO:
+# username/ -> dashboard
+# username/profile/ -> profile
+# username/works -> all work of user
+# username/drafts -> unposted drafts
+# username/bookmarks -> bookmarked stories
