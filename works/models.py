@@ -8,6 +8,7 @@ class Story(models.Model):
     title = models.CharField(max_length=150)
     created_date = models.DateTimeField(default=timezone.now)
     last_modified = models.DateTimeField(default=timezone.now)
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.title
@@ -35,6 +36,7 @@ class Character(models.Model):
     name = models.CharField(max_length=100)
     of_story = models.ForeignKey(Story, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='character_images', blank=True, default='empty.jpg')
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
