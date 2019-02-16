@@ -4,13 +4,13 @@
 {% block content %}
 <div class="content">
     {% if owner %}
-    <div class="profile-settings">
-        <div><a href="{% url 'users:drafts' user.username %}">Your drafts</a> </div>
-        <div><a href="{% url 'users:bookmarks' user.username %}">Your bookmarks</a> </div>
-        <div><a href="{% url 'users:change_username' user.username %}">Change username</a> </div>
-        <div><a href="{% url 'users:change_password' user.username %}">Change password</a> </div>
-        <div><a href="{% url 'users:change_email' user.username %}">Change email</a> </div>
-    </div>
+        <ul class="nav">
+            <li><a href="{% url 'users:drafts' user.username %}">Your drafts</a></li>
+            <li><a href="{% url 'users:bookmarks' user.username %}">Your bookmarks</a></li>
+            <li><a href="{% url 'users:change_username' user.username %}">Change username</a></li>
+            <li><a href="{% url 'users:change_password' user.username %}">Change password</a></li>
+            <li><a href="{% url 'users:change_email' user.username %}">Change email</a></li>
+        </ul>
     {% endif %}
 
     <h2>{{ user.username }}</h2>
