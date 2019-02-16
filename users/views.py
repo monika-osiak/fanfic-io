@@ -36,21 +36,17 @@ def sign_up(request):
     return render(request, 'users/sign_up.html', context)
 
 
-# TODO: dashboard view
-def dashboard(request, username):
-    return HttpResponse('This is dashboard of ' + username)
-
-
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     user_profile = get_object_or_404(Profile, user=user)
-    user_works_list = user.story_set.all()
+    user_works_list = user.story_set.all()[:3]
     context = {
         'user': user,
         'user_profile': user_profile,
         'user_works_list': user_works_list
     }
-    return render(request, 'users/user_profile.html', context)
+    # TODO: maybe add some recent bookmarks?
+    return render(request, 'users/profile.html', context)
 
 
 # TODO: works view
@@ -89,7 +85,7 @@ def edit(request, username):
         'user_form': user_form,
         'profile_form': profile_form
     }
-    return render(request, 'users/update_profile.html', context)
+    return render(request, 'users/edit.html', context)
 
 
 # TODO: change_username view
