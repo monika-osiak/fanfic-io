@@ -20,6 +20,7 @@
             <li><a href="{% url 'works:get_story' work.id %}">{{ work.title }}</a></li>
         {% endfor %}
         </ul>
+        <a href="{% url 'users:works' user.username %}">All stories</a>
     {% else %}
         <p>This user has not posted any stories yet.</p>
     {% endif %}

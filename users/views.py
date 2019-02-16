@@ -51,7 +51,13 @@ def profile(request, username):
 
 # TODO: works view
 def works(request, username):
-    return HttpResponse('List of works written by ' + username)
+    user = get_object_or_404(User, username=username)
+    works_list = user.story_set.all()
+    context = {
+        'user': user,
+        'works_list': works_list,
+    }
+    return render(request, 'users/works.html', context)
 
 
 # TODO: drafts view

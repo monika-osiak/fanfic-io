@@ -1,0 +1,18 @@
+{% extends 'works/base.html' %}
+
+{% block content %}
+<div class="content">
+    <h3>Works by {{ user.username }}</h3>
+    {% for work in works_list %}
+        <div class="work-short-description">
+            <h4>{{ work.title }}</h4>
+            {% for character in work.character_set.all %}
+                {{ character.name }}
+            {% endfor %}
+            <p>{{ work.description }}</p>
+            <a href="{% url 'works:get_story' work.id %}">Read</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}
+
