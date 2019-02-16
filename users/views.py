@@ -37,14 +37,14 @@ def sign_up(request):
 
 
 def profile(request, username):
-    user = get_object_or_404(User, username=username)
-    user_profile = get_object_or_404(Profile, user=user)
-    user_works_list = user.story_set.all()[:3]
+    displayed_user = get_object_or_404(User, username=username)
+    user_profile = get_object_or_404(Profile, user=displayed_user)
+    user_works_list = displayed_user.story_set.all()[:3]
     context = {
-        'user': user,
+        'displayed_user': displayed_user,
         'user_profile': user_profile,
         'user_works_list': user_works_list,
-        'owner': user == request.user
+        'owner': displayed_user == request.user
     }
     # TODO: maybe add some recent bookmarks?
     return render(request, 'users/profile.html', context)

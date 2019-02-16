@@ -13,21 +13,21 @@
         </ul>
     {% endif %}
 
-    <h2>{{ user.username }}</h2>
+    <h2>{{ displayed_user.username }}</h2>
     <img class="user-image" src="{{ user_profile.picture.url }}" width="300" alt="image">
-    <p><b>First name: </b>{{ user.first_name }}</p>
-    <p><b>Last name: </b>{{ user.last_name }}</p>
-    <p><b>Email address: </b>{{ user.email }}</p>
+    <p><b>First name: </b>{{ displayed_user.first_name }}</p>
+    <p><b>Last name: </b>{{ displayed_user.last_name }}</p>
+    <p><b>Email address: </b>{{ displayed_user.email }}</p>
     <p><b>About me:</b>{{ user_profile.description }}</p>
 
-    <h3>Recent works by {{ user.username }}</h3>
+    <h3>Recent works by {{ displayed_user.username }}</h3>
     {% if user_works_list %}
         <ul>
         {% for work in user_works_list %}
             <li><a href="{% url 'works:get_story' work.id %}">{{ work.title }}</a></li>
         {% endfor %}
         </ul>
-        <a href="{% url 'users:works' user.username %}">All stories</a>
+        <a href="{% url 'users:works' displayed_user.username %}">All stories</a>
     {% else %}
         <p>This user has not posted any stories yet.</p>
     {% endif %}
