@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse
-from django.views import generic
-from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -38,6 +36,11 @@ def sign_up(request):
     return render(request, 'users/sign_up.html', context)
 
 
+# TODO: dashboard view
+def dashboard(request, username):
+    return HttpResponse('This is dashboard of ' + username)
+
+
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     user_profile = get_object_or_404(Profile, user=user)
@@ -50,9 +53,24 @@ def profile(request, username):
     return render(request, 'users/user_profile.html', context)
 
 
+# TODO: works view
+def works(request, username):
+    return HttpResponse('List of works written by ' + username)
+
+
+# TODO: drafts view
+def drafts(request, username):
+    return HttpResponse('List of unposted works written by ' + username)
+
+
+# TODO: bookmarks view
+def bookmarks(request, username):
+    return HttpResponse('List of stories bookmarked by ' + username)
+
+
 @login_required
 @transaction.atomic
-def update_profile(request, username):
+def edit(request, username):
     user = get_object_or_404(User, username=username)
     if user != request.user:
         raise Http404
@@ -65,13 +83,25 @@ def update_profile(request, username):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            # messages.success(request, 'Your profile was successfully updated!')
             return HttpResponseRedirect(reverse('users:profile', args=[username]))
-        # else:
-            # messages.error(request, 'Please correct the error below.')
     context = {
         'user': user,
         'user_form': user_form,
         'profile_form': profile_form
     }
     return render(request, 'users/update_profile.html', context)
+
+
+# TODO: change_username view
+def change_username(request, username):
+    return HttpResponse('Change your username ' + username + ' (just not yet, okay?)')
+
+
+# TODO: change_password view
+def change_password(request, username):
+    return HttpResponse('Change your password ' + username + ' (just not yet, okay?)')
+
+
+# TODO: change_email view
+def change_email(request, username):
+    return HttpResponse('Change your email ' + username + ' (just not yet, okay?)')
