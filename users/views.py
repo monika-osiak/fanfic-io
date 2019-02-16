@@ -43,7 +43,8 @@ def profile(request, username):
     context = {
         'user': user,
         'user_profile': user_profile,
-        'user_works_list': user_works_list
+        'user_works_list': user_works_list,
+        'owner': user == request.user
     }
     # TODO: maybe add some recent bookmarks?
     return render(request, 'users/profile.html', context)

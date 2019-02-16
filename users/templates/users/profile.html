@@ -1,11 +1,18 @@
-<div class="header">
-    <h1>fanfic.io</h1>
-</div>
-
+{% extends 'works/base.html' %}
 {% load static %}
 
-
+{% block content %}
 <div class="content">
+    {% if owner %}
+    <div class="profile-settings">
+        <div><a href="{% url 'users:drafts' user.username %}">Your drafts</a> </div>
+        <div><a href="{% url 'users:bookmarks' user.username %}">Your bookmarks</a> </div>
+        <div><a href="{% url 'users:change_username' user.username %}">Change username</a> </div>
+        <div><a href="{% url 'users:change_password' user.username %}">Change password</a> </div>
+        <div><a href="{% url 'users:change_email' user.username %}">Change email</a> </div>
+    </div>
+    {% endif %}
+
     <h2>{{ user.username }}</h2>
     <img class="user-image" src="{{ user_profile.picture.url }}" width="300" alt="image">
     <p><b>First name: </b>{{ user.first_name }}</p>
@@ -28,3 +35,4 @@
 
 
 <a href="{% url 'main:index' %}">Take me back</a>
+{% endblock content %}
