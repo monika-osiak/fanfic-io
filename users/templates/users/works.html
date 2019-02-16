@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="content">
-    <h3>Works by {{ user.username }}</h3>
+    <h3>Works by {{ author.username }}</h3>
     {% for work in works_list %}
         <div class="work-short-description">
             <h4>{{ work.title }}</h4>
