@@ -50,7 +50,6 @@ def profile(request, username):
     return render(request, 'users/profile.html', context)
 
 
-# TODO: works view
 def works(request, username):
     author = get_object_or_404(User, username=username)
     works_list = author.story_set.all()
