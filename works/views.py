@@ -28,10 +28,27 @@ class ChapterView(generic.DetailView):
 
 def get_story(request, story_id):
     story = get_object_or_404(Story, id=story_id)
+    if request.method == 'POST':
+        request.user.profile.bookmarks.add(story)
+        print('Story successful added to bookmarks!')
     context = {
         'story': story
     }
     return render(request, 'works/get_story.html', context)
+
+
+@login_required()
+def add_bookmark(request, story_id):
+    story = get_object_or_404(Story, id=story_id)
+    request.user.profile.bookmarks.add(story)
+    return HttpResponseRedirect(reverse('works:get_story', args=[story_id]))
+
+
+@login_required()
+def remove_bookmark(request, story_id):
+    story = get_object_or_404(Story, id=story_id)
+    request.user.profile.bookmarks.remove(story)
+    return HttpResponseRedirect(reverse('works:get_story', args=[story_id]))
 
 
 def get_chapter(request, story_id, chapter_number):

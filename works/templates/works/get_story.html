@@ -4,6 +4,13 @@
 <div class="content">
     <h2>{{ story.title }}</h2>
     <p>{{ story.description }}</p>
+    {% if user.is_authenticated %}
+        {% if story not in user.profile.bookmarks.all %}
+            <a type="button" href="{% url 'works:add_bookmark' story.id %}">Add bookmark</a>
+        {% else %}
+            <a type="button" href="{% url 'works:remove_bookmark' story.id %}">Remove bookmark</a>
+        {% endif %}
+    {% endif %}
     <h3>Chapters:</h3>
     <ol>
         {% for chapter in story.chapter_set.all %}
