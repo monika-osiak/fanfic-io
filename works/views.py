@@ -32,19 +32,20 @@ def get_story(request, story_id):
         request.user.profile.bookmarks.add(story)
         print('Story successful added to bookmarks!')
     context = {
-        'story': story
+        'story': story,
+        'is_author': request.user == story.author
     }
     return render(request, 'works/get_story.html', context)
 
 
-@login_required()
+@login_required
 def add_bookmark(request, story_id):
     story = get_object_or_404(Story, id=story_id)
     request.user.profile.bookmarks.add(story)
     return HttpResponseRedirect(reverse('works:get_story', args=[story_id]))
 
 
-@login_required()
+@login_required
 def remove_bookmark(request, story_id):
     story = get_object_or_404(Story, id=story_id)
     request.user.profile.bookmarks.remove(story)

@@ -16,15 +16,21 @@
         {% for chapter in story.chapter_set.all %}
         <li><a href="{% url 'works:get_chapter' story.id chapter.number %}">{{ chapter.title }}</a></li>
         {% endfor %}
-        <!-- TODO: when user is the author -> add new chapter -->
+
     </ol>
+    {% if is_author %}
+        <p><a href="{% url 'works:new_chapter' story.id %}">Add new chapter</a></p>
+    {% endif %}
     <h3>Characters:</h3>
     <ul>
         {% for character in story.character_set.all %}
            <li><a href="{% url 'works:get_character' story.id character.id %}">{{ character.name }}</a></li>
         {% endfor %}
-        <!-- TODO: when user is the author -> add new character -->
+
     </ul>
+    {% if is_author %}
+        <p><a href="{% url 'works:new_character' story.id %}">Add new character</a></p>
+    {% endif %}
 </div>
 
 <a href="{% url 'works:index' %}">Take me back</a>
