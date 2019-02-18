@@ -65,9 +65,14 @@ def drafts(request, username):
     return HttpResponse('List of unposted works written by ' + username)
 
 
-# TODO: bookmarks view
 def bookmarks(request, username):
-    return HttpResponse('List of stories bookmarked by ' + username)
+    owner = get_object_or_404(User, username=username)
+    bookmarks_list = owner.profile.bookmarks.all()
+    context = {
+        'owner': owner,
+        'bookmarks': bookmarks_list
+    }
+    return render(request, 'users/bookmarks.html', context)
 
 
 @login_required

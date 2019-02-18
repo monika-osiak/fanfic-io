@@ -1,0 +1,13 @@
+{% extends 'works/base.html' %}
+
+{% block content %}
+<div class="content">
+    <h3>{{ bookmarks.count }} bookmarks by {{ owner.username }}</h3>
+    <ul>
+        {% for bookmark in bookmarks %}
+            <ol><a href="{% url 'works:get_story' bookmark.id %}">{{ bookmark.title }}</a> </ol>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock content %}
