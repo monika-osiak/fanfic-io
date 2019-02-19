@@ -40,10 +40,12 @@ def profile(request, username):
     displayed_user = get_object_or_404(User, username=username)
     user_profile = get_object_or_404(Profile, user=displayed_user)
     user_works_list = displayed_user.story_set.all()[:3]
+    user_bookmarks_list = user_profile.bookmarks.all()[:3]
     context = {
         'displayed_user': displayed_user,
         'user_profile': user_profile,
         'user_works_list': user_works_list,
+        'user_bookmarks_list': user_bookmarks_list,
         'owner': displayed_user == request.user
     }
     # TODO: maybe add some recent bookmarks?

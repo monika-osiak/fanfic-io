@@ -31,6 +31,18 @@
     {% else %}
         <p>This user has not posted any stories yet.</p>
     {% endif %}
+
+    <h3>Recent bookmarks by {{ displayed_user.username }}</h3>
+    {% if user_bookmarks_list %}
+        <ul>
+        {% for work in user_bookmarks_list %}
+            <li><a href="{% url 'works:get_story' work.id %}">{{ work.title }}</a></li>
+        {% endfor %}
+        </ul>
+        <a href="{% url 'users:bookmarks' displayed_user.username %}">All bookmarks</a>
+    {% else %}
+        <p>This user has not bookmarked any stories yet.</p>
+    {% endif %}
 </div>
 
 
