@@ -48,7 +48,6 @@ def profile(request, username):
         'user_bookmarks_list': user_bookmarks_list,
         'owner': displayed_user == request.user
     }
-    # TODO: maybe add some recent bookmarks?
     return render(request, 'users/profile.html', context)
 
 
