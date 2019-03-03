@@ -127,4 +127,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'fanfic_io/media')
 
+STATICFILES_DIRS = [
+    'fanfic_io/static'
+]
+
 LOGIN_URL = '/users/login'
