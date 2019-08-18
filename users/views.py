@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import transaction
 
-from .forms import SignUpForm, UserForm, ProfileForm, UsernameChangeForm
+from .forms import SignUpForm, UserForm, ProfileForm
 from .models import Profile
 
 
@@ -102,21 +102,7 @@ def edit(request, username):
 
 # TODO: change_username view
 def change_username(request, username):
-    user = get_object_or_404(User, username=username)
-    if user != request.user:
-        raise Http404
-    if request.method != 'POST':
-        change_username_form = UsernameChangeForm(instance=user)
-    else:
-        change_username_form = UsernameChangeForm(request.POST, instance=user)
-        if change_username_form.is_valid():
-            change_username_form.save()
-            return HttpResponseRedirect(reverse('users:profile', args=[user.username]))
-    context = {
-        'user': user,
-        'form': change_username_form
-    }
-    return render(request, 'users/change_username.html', context)
+    return HttpResponse('Change your username ' + username + ' (just not yet, okay?)')
 
 
 # TODO: change_password view

@@ -32,9 +32,3 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['picture', 'description']
-
-
-class UsernameChangeForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['username']

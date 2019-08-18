@@ -1,9 +1,0 @@
-{% extends 'works/base.html' %}
-
-{% block content %}
-    <form method="POST" action="{% url 'users:change_username' user.username %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button name="submit">Update</button>
-    </form>
-{% endblock content %}
